@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import API_BASE_URL from "./api";
 
 function Matches({ userId, onOpenChat }) {
   const [matches, setMatches] = useState([]);
@@ -9,7 +10,7 @@ function Matches({ userId, onOpenChat }) {
     const getMatches = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:5000/api/matches/${userId}`
+          `${API_BASE_URL}/api/matches/${userId}`
         );
 
         const data = await response.json();

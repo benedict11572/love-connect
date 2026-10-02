@@ -1,7 +1,7 @@
-
 import { useState } from "react";
+import API_BASE_URL from "./api";
 
-function Login({ onLogin }) {
+function Login({ onLogin, onSignup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,7 +10,7 @@ function Login({ onLogin }) {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/login",
+        `${API_BASE_URL}/api/login`,
         {
           method: "POST",
           headers: {
@@ -24,8 +24,6 @@ function Login({ onLogin }) {
       );
 
       const data = await response.json();
-    
-
 
       if (!response.ok) {
         alert(data.message);
@@ -99,7 +97,7 @@ function Login({ onLogin }) {
 
           <button
             type="button"
-            onClick={() => window.location.reload()}
+            onClick={onSignup}
           >
             Sign Up
           </button>
@@ -113,4 +111,3 @@ function Login({ onLogin }) {
 }
 
 export default Login;
-

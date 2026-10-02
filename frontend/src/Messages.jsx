@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import API_BASE_URL from "./api";
 
 function Messages({ userId, onOpenChat }) {
   const [conversations, setConversations] = useState([]);
@@ -9,7 +10,7 @@ function Messages({ userId, onOpenChat }) {
       const token = localStorage.getItem("access_token");
 
       const response = await fetch(
-        `http://127.0.0.1:5000/api/conversations/${userId}`,
+        `${API_BASE_URL}/api/conversations/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`

@@ -9,7 +9,7 @@ import Notifications from "./Notifications";
 import UserProfile from "./UserProfile";
 import Messages from "./Messages";
 import AdminPanel from "./AdminPanel";
-
+import API_BASE_URL from "./api";
 
 function App() {
   const [page, setPage] = useState("login");
@@ -36,8 +36,6 @@ function App() {
       return;
     }
 
-    // Keep the token, but we need the user information
-    // from the previous login.
     const savedUser = localStorage.getItem("current_user");
 
     if (savedUser) {
@@ -56,8 +54,6 @@ function App() {
         setPage("login");
       }
     } else {
-      // Token exists but user information is missing.
-      // Send the user back to login.
       localStorage.removeItem("access_token");
       setCurrentUser(null);
       setPage("login");
@@ -77,7 +73,7 @@ function App() {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:5000/api/messages/${currentUser.id}/unread-count`,
+        `${API_BASE_URL}/api/messages/${currentUser.id}/unread-count`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -130,23 +126,20 @@ function App() {
     setPage("profile");
   };
 
-
   const handleLoginSuccess = (user) => {
-  setCurrentUser(user);
+    setCurrentUser(user);
 
-  localStorage.setItem(
-    "current_user",
-    JSON.stringify(user)
-  );
+    localStorage.setItem(
+      "current_user",
+      JSON.stringify(user)
+    );
 
-  if (user.is_admin === true) {
-    setPage("admin");
-  } else {
-    setPage("discover");
-  }
-};
-
-
+    if (user.is_admin === true) {
+      setPage("admin");
+    } else {
+      setPage("discover");
+    }
+  };
 
   // =========================================
   // NOTIFICATION PROFILE
@@ -261,6 +254,10 @@ function App() {
         />
       )}
 
+      {/* ========================= */}
+      {/* ADMIN */}
+      {/* ========================= */}
+
       {page === "admin" && currentUser?.is_admin === true && (
         <AdminPanel />
       )}
@@ -272,6 +269,7 @@ function App() {
       {page === "login" && (
         <Login
           onLogin={handleLoginSuccess}
+          onSignup={() => setPage("signup")}
         />
       )}
 

@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import PhotoComments from "./PhotoComments";
+import API_BASE_URL from "./api";
 
 function PhotoGallery({
   userId,
@@ -15,7 +16,7 @@ function PhotoGallery({
     const loadPhotos = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:5000/api/photos/${userId}?current_user_id=${currentUserId}`
+          `${API_BASE_URL}/api/photos/${userId}?current_user_id=${currentUserId}`
         );
 
         const data = await response.json();
@@ -86,7 +87,7 @@ function PhotoGallery({
     const token = localStorage.getItem("access_token");
 
     const response = await fetch(
-      "http://127.0.0.1:5000/api/photo-like",
+      `${API_BASE_URL}/api/photo-like`,
       {
         method: "POST",
         headers: {
@@ -149,7 +150,7 @@ function PhotoGallery({
   const handleUnlike = async (photoId) => {
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/photo-unlike",
+        `${API_BASE_URL}/api/photo-unlike`,
         {
           method: "DELETE",
           headers: {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import API_BASE_URL from "./api";
 
 function PhotoComments({ photoId, currentUserId }) {
   const [comments, setComments] = useState([]);
@@ -14,7 +15,7 @@ function PhotoComments({ photoId, currentUserId }) {
         const token = localStorage.getItem("access_token");
 
         const response = await fetch(
-          `http://127.0.0.1:5000/api/photo-comments/${photoId}`,
+          `${API_BASE_URL}/api/photo-comments/${photoId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -52,7 +53,7 @@ function PhotoComments({ photoId, currentUserId }) {
       const token = localStorage.getItem("access_token");
 
       const response = await fetch(
-        "http://127.0.0.1:5000/api/photo-comment",
+        `${API_BASE_URL}/api/photo-comment`,
         {
           method: "POST",
           headers: {

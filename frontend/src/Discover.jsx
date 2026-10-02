@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ProfileCard from "./ProfileCard";
+import API_BASE_URL from "./api";
 
 function Discover({ userId }) {
   const [users, setUsers] = useState([]);
@@ -12,7 +13,7 @@ function Discover({ userId }) {
     const getUsers = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:5000/api/users"
+          `${API_BASE_URL}/api/users`
         );
 
         const data = await response.json();
@@ -45,7 +46,7 @@ function Discover({ userId }) {
   const handleLike = async (likedUserId) => {
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/like",
+          `${API_BASE_URL}/api/like`,
         {
           method: "POST",
           headers: {

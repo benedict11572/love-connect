@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import PhotoGallery from "./PhotoGallery";
+import API_BASE_URL from "./api";
 
 function UserProfile({
   userId,
@@ -15,7 +16,7 @@ function UserProfile({
     const loadProfile = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:5000/api/profile/${userId}`
+          `${API_BASE_URL}/api/profile/${userId}`
         );
 
         const data = await response.json();

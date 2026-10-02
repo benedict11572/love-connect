@@ -20,7 +20,19 @@ from functools import wraps
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+
+CORS(
+    app,
+    resources={
+        r"/api/*": {
+            "origins": [
+                "http://localhost:5173"
+            ],
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"]
+        }
+    }
+)
 # JWT Authentication
 app.config["JWT_SECRET_KEY"] = os.getenv(
     "JWT_SECRET_KEY",

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import API_BASE_URL from "./api";
 
 function Chat({ currentUserId, otherUserId }) {
   const [message, setMessage] = useState("");
@@ -15,7 +16,7 @@ function Chat({ currentUserId, otherUserId }) {
     try {
       const token = localStorage.getItem("access_token");
       const response = await fetch(
-        `http://127.0.0.1:5000/api/profile/${otherUserId}`,
+        `${API_BASE_URL}/api/profile/${otherUserId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -48,7 +49,7 @@ function Chat({ currentUserId, otherUserId }) {
       const token = localStorage.getItem("access_token");
 
       const response = await fetch(
-        `http://127.0.0.1:5000/api/messages/${currentUserId}/${otherUserId}`,
+        `${API_BASE_URL}/api/messages/${currentUserId}/${otherUserId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -64,7 +65,7 @@ function Chat({ currentUserId, otherUserId }) {
         // Mark incoming messages as read
        
         await fetch(
-          `http://127.0.0.1:5000/api/messages/${currentUserId}/${otherUserId}/read`,
+          `${API_BASE_URL}/api/messages/${currentUserId}/${otherUserId}/read`,
           {
             method: "PUT",
             headers: {
@@ -116,7 +117,7 @@ function Chat({ currentUserId, otherUserId }) {
       const token = localStorage.getItem("access_token");
 
       const response = await fetch(
-        "http://127.0.0.1:5000/api/messages",
+        `${API_BASE_URL}/api/messages`,
         {
           method: "POST",
           headers: {

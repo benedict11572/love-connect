@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import API_BASE_URL from "./api";
 
 function AdminPanel() {
   const [users, setUsers] = useState([]);
@@ -16,7 +17,7 @@ function AdminPanel() {
 
       // Load users
       const response = await fetch(
-        "http://127.0.0.1:5000/api/admin/users",
+        `${API_BASE_URL}/api/admin/users`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -47,7 +48,7 @@ function AdminPanel() {
 
       // Load uploaded photos
       const photosResponse = await fetch(
-        "http://127.0.0.1:5000/api/admin/photos",
+        `${API_BASE_URL}/api/admin/photos`,
         {
           headers: {
             Authorization: `Bearer ${token}`

@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import API_BASE_URL from "./api";
 
 function Profile({ userId, goToHome }) {
   const [name, setName] = useState("");
@@ -87,7 +88,7 @@ function Profile({ userId, goToHome }) {
       // =========================
 
       const profileResponse = await fetch(
-        "http://127.0.0.1:5000/api/profile",
+        `${API_BASE_URL}/api/profile`,
         {
           method: "POST",
           headers: {
@@ -120,7 +121,7 @@ function Profile({ userId, goToHome }) {
 
 for (const photo of galleryPhotos) {
   const photoResponse = await fetch(
-    "http://127.0.0.1:5000/api/photos",
+    `${API_BASE_URL}/api/photos`,
     {
       method: "POST",
       headers: {
