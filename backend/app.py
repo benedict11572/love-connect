@@ -26,7 +26,8 @@ CORS(
     resources={
         r"/api/*": {
             "origins": [
-                "http://localhost:5173"
+                "http://localhost:5173",
+                "https://love-connect-frontend.onrender.com"
             ],
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": ["Content-Type", "Authorization"]
